@@ -45,11 +45,11 @@ fetch_resources(Type) ->
 handle_cast({add_target_resource_type, Type}, State) ->
   TargetTypes = State#state.target_resource_types,
   NewTargetTypes = [Type, lists:delete(Type, TargetTypes)],
-  {norelpy, State#state{target_resource_types = NewTargetTypes}};
+  {noreply, State#state{target_resource_types = NewTargetTypes}};
 handle_cast({add_local_resource, {Type, Instance}}, State) ->
   ResourceTuples = State#state.local_resource_tuples,
   NewResourceTuples = add_resource(Type, Instance, ResourceTuples),
-  {norelpy, State#state{local_resource_tuples = NewResourceTuples}};
+  {noreply, State#state{local_resource_tuples = NewResourceTuples}};
 handle_cast(trade_resources, State) ->
   ResourceTuples = State#state.local_resource_tuples,
   AllNodes = [node() | nodes()],
