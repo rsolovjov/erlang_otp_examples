@@ -5,9 +5,14 @@ erlc -o ./resource_discovery/ebin ./resource_discovery/src/*.erl
 
 To run the program, first start Erlang like this:
 
-erl -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -sname one
+erl -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -mnesia dir '"/tmp/mnesia_store"' -name d-node
+
+Erl>
 
 application:start(sasl).
 mnesia:start().
 application:start(resource_discovery).
 application:start(simple_cache).
+
+simple_cache:insert(first, "hello").
+simple_cache:lookup(first).
