@@ -1,0 +1,13 @@
+To build this code, run the following command:
+
+erlc -o ./simple_cache/ebin ./simple_cache/src/*.erl
+erlc -o ./resource_discovery/ebin ./resource_discovery/src/*.erl
+
+To run the program, first start Erlang like this:
+
+erl -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -sname one
+
+application:start(sasl).
+mnesia:start().
+application:start(resource_discovery).
+application:start(simple_cache).
