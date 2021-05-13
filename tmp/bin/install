@@ -1,0 +1,4 @@
+#!/bin/sh
+ROOT='pwd'
+DIR=./erts-11.1.8
+sed s:%FINAL_ROOTDIR%:$ROOT: $DIR/erl.src > $DIR/erl

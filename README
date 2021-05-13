@@ -1,0 +1,33 @@
+To build this code, run the following command:
+
+erlc -o ./simple_cache/ebin ./simple_cache/src/*.erl
+erlc -o ./resource_discovery/ebin ./resource_discovery/src/*.erl
+
+To run the program, first start Erlang like this:
+
+erl -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -mnesia dir '"/tmp/mnesia_store"' -sname cache1
+
+Buid release:
+systools:make_script("simple_cache", []).
+systools:make_tar("simple_cache", [{erts, code:root_dir()}]).
+
+install script
+#!/bin/sh
+ROOT='pwd'
+DIR=./erts-11.1.8
+sed s:%FINAL_ROOTDIR%:$ROOT: $DIR/erl.src > $DIR/erl
+
+run script:
+#!/bin/sh
+./erts-11.1.8/bin/erl \
+    -sname cache \
+    -boot ./releases/0.1.0/start \
+    -config ./releases/0.1.0/sys \
+    -detached
+
+
+Make tar
+erl_tar:create("simple_cache-0.3.0.tar.gz", ["erts-11.1.8", "lib", "releases", "bin"], [compressed]).
+
+Extract release
+erl_tar:extract("simple_cache-0.3.0.tar.gz", [{cwd, "target"}, compressed]).
