@@ -25,7 +25,7 @@ stop(_State) ->
     ok.
 
 ensure_contact() ->
-    DefaultNodes = ['d-node@staging.durak-game.ru', 'j-node@staging-v3.joker-game.com'],
+    DefaultNodes = ['cache1@localhost', 'cache2@localhost'],
     case get_env(simple_cache, contact_nodes, DefaultNodes) of
         [] ->
             {error, no_contact_nodes};

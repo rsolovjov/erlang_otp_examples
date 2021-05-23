@@ -2,10 +2,18 @@ To build this code, run the following command:
 
 erlc -o ./simple_cache/ebin ./simple_cache/src/*.erl
 erlc -o ./resource_discovery/ebin ./resource_discovery/src/*.erl
+erlc -o ./tcp_interface/ebin ./tcp_interface/src/*.erl
 
 To run the program, first start Erlang like this:
 
-erl -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -mnesia dir '"/tmp/mnesia_store"' -sname cache1
+erl -pa ./tcp_interface/ebin -pa ./simple_cache/ebin -pa ./resource_discovery/ebin -mnesia dir '"/tmp/mnesia_store"' -sname cache1
+
+application:start(sasl).
+mnesia:start().
+application:start(resource_discovery).
+application:start(simple_cache).
+application:start(tcp_interface).
+
 
 Buid release:
 systools:make_script("simple_cache", []).

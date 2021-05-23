@@ -13,6 +13,7 @@ application:start(sasl).
 mnesia:start().
 application:start(resource_discovery).
 application:start(simple_cache).
+application:start(tcp_interface).
 
 simple_cache:insert(first, "hello").
 simple_cache:lookup(first).
