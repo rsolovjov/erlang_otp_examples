@@ -25,7 +25,7 @@ stop(_State) ->
     ok.
 
 ensure_contact() ->
-    DefaultNodes = ['cache1@localhost', 'cache2@localhost'],
+    DefaultNodes = ['cache1@Romans-Mac-mini', 'cache2@Romans-Mac-mini'],
     case get_env(simple_cache, contact_nodes, DefaultNodes) of
         [] ->
             {error, no_contact_nodes};
